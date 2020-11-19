@@ -51,67 +51,68 @@ class Algoritmo{
             //Se iniciará por el oido derecho
             //echo "Estoy en el Algoritmo";
         
+        $grupo = array_rand($this->listado,2);
+                    
+        //Obtengo 2 grupos de palabras distintos sin que se repitan
+        $grupoString1 = $this->listado[$grupo[0]];
+        $grupoString2 = $this->listado[$grupo[1]];
+        
             
-            //primer ciclo for indicará las veces que se repite el examen (dosveces, una por cada oido)
+            //primer ciclo for indicará las veces que se repite el examen (dos veces, una por cada oido)
         for($ciclo = 0; $ciclo <=2; $ciclo++){
                 
             if($ciclo == 1){
                 
-                $this->seleccionaGrupo();
+                $this->seleccionaGrupo($grupoString1);
             }
             
             if($ciclo == 2){ //si ciclo == 2, se hace el oído izquierdo
                 
-                $this->seleccionaGrupo();
+                $this->seleccionaGrupo($grupoString2);
                     
             }
         }
     }
     
-    public function seleccionaGrupo(){
-        
-        $grupo = array_rand($this->listado);
+    public function seleccionaGrupo($grupoString){           
                     
-                $grupoString = $this->listado[$grupo];
+        echo "      Se ha escogido: ".$grupoString;
                     
+        //dependiendo del grupo escogido, se comenzará con la selección de palabras del grupo
                     
-                echo "      Se ha escogido: ".$grupoString;
+        if(strcmp($grupoString, "grupo1")== 0){
+            echo " = grupo1"."<br>";
                     
-                    //dependiendo del grupo escogido, se comenzará con la selección de palabras del grupo
-                    
-                if(strcmp($grupoString, "grupo1")== 0){
-                    echo " = grupo1"."<br>";
-                    
-                    $palabrasSeleccionadas = array_rand($this->grupo_uno, 10);
+            $palabrasSeleccionadas = array_rand($this->grupo_uno, 10);
                 
-                    $this->seleccionaPalabra($palabrasSeleccionadas);
+            $this->seleccionaPalabra($palabrasSeleccionadas);
                     
-                }else if (strcmp($grupoString, "grupo2")== 0){
-                    echo " = grupo2"."<br>";
-                    $palabrasSeleccionadas = array_rand($this->grupo_dos, 10);
-                    $this->seleccionaPalabra($palabrasSeleccionadas);
+        }else if (strcmp($grupoString, "grupo2")== 0){
+            echo " = grupo2"."<br>";
+            $palabrasSeleccionadas = array_rand($this->grupo_dos, 10);
+            $this->seleccionaPalabra($palabrasSeleccionadas);
                     
-                }else if (strcmp($grupoString, "grupo3")== 0){
-                    echo " = grupo3"."<br>";
+        }else if (strcmp($grupoString, "grupo3")== 0){
+            echo " = grupo3"."<br>";
                     
-                    $palabrasSeleccionadas = array_rand($this->grupo_tres, 10);
-                    $this->seleccionaPalabra($palabrasSeleccionadas);
+            $palabrasSeleccionadas = array_rand($this->grupo_tres, 10);
+            $this->seleccionaPalabra($palabrasSeleccionadas);
                     
-                }else if (strcmp($grupoString, "grupo4")== 0){
-                    echo " = grupo4"."<br>";
+        }else if (strcmp($grupoString, "grupo4")== 0){
+            echo " = grupo4"."<br>";
                     
-                    $palabrasSeleccionadas = array_rand($this->grupo_cuatro, 10);
-                    $this->seleccionaPalabra($palabrasSeleccionadas);
+            $palabrasSeleccionadas = array_rand($this->grupo_cuatro, 10);
+            $this->seleccionaPalabra($palabrasSeleccionadas);
                     
-                }else if (strcmp($grupoString, "grupo5")== 0){
-                    echo " = grupo5"."<br>";
+        }else if (strcmp($grupoString, "grupo5")== 0){
+            echo " = grupo5"."<br>";
                     
-                    $palabrasSeleccionadas = array_rand($this->grupo_cinco, 10);
-                    $this->seleccionaPalabra($palabrasSeleccionadas);
+            $palabrasSeleccionadas = array_rand($this->grupo_cinco, 10);
+            $this->seleccionaPalabra($palabrasSeleccionadas);
                     
-                }else {
-                    echo " Ha habido un error al escoger un grupo";
-                }
+        }else {
+            echo " Ha habido un error al escoger un grupo";
+        }
         
     }
     
