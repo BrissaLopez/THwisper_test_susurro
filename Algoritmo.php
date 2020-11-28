@@ -6,7 +6,7 @@
 
 class Algoritmo{
 
-     private $ciclo; //variable que inicia el test
+     //private $ciclo; //variable que inicia el test
      
      private $grupo_uno;
      private $grupo_dos;
@@ -17,6 +17,13 @@ class Algoritmo{
      private $grupo;
          
      private $listado;
+     
+     private $palabra1;
+     private $palabra2;
+     private $palabra3;
+     private $palabra4;
+     private $palabra5;
+     private $palabra6;
      
      //private $nombrePalabra;
      
@@ -63,18 +70,18 @@ class Algoritmo{
                 
             if($ciclo == 1){
                 
-                $this->seleccionaGrupo($grupoString1);
+                $this->seleccionaGrupo($grupoString1, $ciclo);
             }
             
             if($ciclo == 2){ //si ciclo == 2, se hace el oído izquierdo
                 
-                $this->seleccionaGrupo($grupoString2);
+                $this->seleccionaGrupo($grupoString2, $ciclo);
                     
             }
         }
     }
     
-    public function seleccionaGrupo($grupoString){           
+    public function seleccionaGrupo($grupoString, $ciclo){           
                     
         echo "      Se ha escogido: ".$grupoString;
                     
@@ -83,49 +90,93 @@ class Algoritmo{
         if(strcmp($grupoString, "grupo1")== 0){
             echo " = grupo1"."<br>";
                     
-            $palabrasSeleccionadas = array_rand($this->grupo_uno, 10);
+            $palabrasSeleccionadas = array_rand($this->grupo_uno, 3);
                 
-            $this->seleccionaPalabra($palabrasSeleccionadas);
+            $this->seleccionaPalabra($palabrasSeleccionadas, $ciclo);
                     
         }else if (strcmp($grupoString, "grupo2")== 0){
             echo " = grupo2"."<br>";
-            $palabrasSeleccionadas = array_rand($this->grupo_dos, 10);
-            $this->seleccionaPalabra($palabrasSeleccionadas);
+            $palabrasSeleccionadas = array_rand($this->grupo_dos, 3);
+            $this->seleccionaPalabra($palabrasSeleccionadas, $ciclo);
                     
         }else if (strcmp($grupoString, "grupo3")== 0){
             echo " = grupo3"."<br>";
                     
-            $palabrasSeleccionadas = array_rand($this->grupo_tres, 10);
-            $this->seleccionaPalabra($palabrasSeleccionadas);
+            $palabrasSeleccionadas = array_rand($this->grupo_tres, 3);
+            $this->seleccionaPalabra($palabrasSeleccionadas,$ciclo);
                     
         }else if (strcmp($grupoString, "grupo4")== 0){
             echo " = grupo4"."<br>";
                     
-            $palabrasSeleccionadas = array_rand($this->grupo_cuatro, 10);
-            $this->seleccionaPalabra($palabrasSeleccionadas);
+            $palabrasSeleccionadas = array_rand($this->grupo_cuatro, 3);
+            $this->seleccionaPalabra($palabrasSeleccionadas, $ciclo);
                     
         }else if (strcmp($grupoString, "grupo5")== 0){
             echo " = grupo5"."<br>";
                     
-            $palabrasSeleccionadas = array_rand($this->grupo_cinco, 10);
-            $this->seleccionaPalabra($palabrasSeleccionadas);
+            $palabrasSeleccionadas = array_rand($this->grupo_cinco, 3);
+            $this->seleccionaPalabra($palabrasSeleccionadas, $ciclo);
                     
         }else {
             echo " Ha habido un error al escoger un grupo";
         }
         
+        header("Location:http://127.0.0.1:1880/test?palabra1=$this->palabra1&palabra2=$this->palabra2&palabra3=$this->palabra3&palabra4=$this->palabra4&palabra5=$this->palabra5&palabra6=$this->palabra6");
+        
     }
     
     
-    public function seleccionaPalabra($arrayPalabrasAleatorias){
+    public function seleccionaPalabra($arrayPalabrasAleatorias, $ciclo){
         
         foreach ($arrayPalabrasAleatorias as $indicePalabra => $nombrePalabra){
             
-            echo " ".$indicePalabra." = ".$nombrePalabra."<br>";
+       
+            if($ciclo==1){
+                if($indicePalabra ==0){
+                    $this->palabra1= $nombrePalabra;
+                   
+                }
+                if($indicePalabra ==1){
+                    $this->palabra2= $nombrePalabra;
+                  
+                }
+                if($indicePalabra ==2){
+                    $this->palabra3= $nombrePalabra;
+                  
+                }
+                
+            }
+            if($ciclo==2){
+                if($indicePalabra ==0){
+                    $this->palabra4= $nombrePalabra;
+                   
+                }
+                if($indicePalabra ==1){
+                    $this->palabra5= $nombrePalabra;
+                   
+                }
+                if($indicePalabra ==2){
+                    $this->palabra6= $nombrePalabra;
+                    
+                }
+                
+            }
             
+            
+            
+            //echo " ".$indicePalabra." = ".$nombrePalabra."<br>";
+            
+            
+            
+             
         }
         
+        //$palabras= array_values($arrayPalabrasAleatorias);
+        //print_r(array_values($arrayPalabrasAleatorias));
+        //header("Location:http://localhost:90/TWHISPER/EnviaANodeRed.php?palabra1=$palabra1&palabra2=$palabra2&palabra3=$palabra3");
+        //header("Location:http://127.0.0.1:1880/test?palabra1=$palabra1&palabra2=$palabra2&palabra3=$palabra3");
         //var_export($arrayPalabrasAleatorias);
+        
     }
         
       

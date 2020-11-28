@@ -11,9 +11,9 @@
     </head>
     <body>
         <h1>Botón de prueba</h1>
-        <form  method="POST">
+        <form  method="POST" >
             
-            <input type="submit"  name="inicioTest" value="Iniciar Test">
+            <input type="submit"  name="inicioTest" value="Iniciar Test" >
             
             <?php
                 include"Algoritmo.php";
@@ -23,8 +23,9 @@
 
                 } 
             ?>
-           
-            
+             
         </form>
+        
+     
     </body>
 </html>
