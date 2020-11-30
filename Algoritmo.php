@@ -31,21 +31,21 @@ class Algoritmo{
 
 	//constructor
      public function __construct(){
-          $this->grupo_uno = ["amo"=>1, "cruel"=>2, "cuna"=>3, "doce"=>4,"humo"=>5,"luca"=>6,
-                "mano"=>7,"mono"=>8, "mudo"=>9, "mulo"=>10, "nado"=>11, "nieve"=>12, "nube"=>13, "nueve"=>14,"nuez"=>15,
-                "once"=>16, "tuno"=>17, "turco"=>18, "tuyo"=>18, "uno"=>19];
+          $this->grupo_uno = [1=>"amo", 2=>"cruel", 3=>"cuna", 4=>"doce",5=>"humo",6=>"luca",
+                7=>"mano",8=>"mono", 9=>"mudo", 10=>"mulo", 11=>"nado", 12=>"nieve", 13=>"nube", 14=>"nueve",15=>"nuez",
+                16=>"once", 17=>"tuno", 18=>"turco", 19=>"tuyo", 20=>"uno"];
           
-          $this->grupo_dos = ["bar"=>20, "buey"=>21, "cal"=>22, "club"=>23, "dios"=>24, "flan"=>25, "luis"=>26, "para"=>27,
-              "pez"=>28, "por"=>29, "quien"=>30, "rey"=>31, "riel"=>32, "sal"=>33, "tul"=>34, "vial"=>35, "voy"=>36];
+          $this->grupo_dos = [21=>"bar", 22=>"buey", 23=>"cal", 24=>"club", 25=>"dios", 26=>"flan", 27=>"luis", 28=>"para",
+              29=>"pez", 30=>"por", 31=>"quien", 32=>"rey", 33=>"riel", 34=>"sal", 35=>"tul", 36=>"vial", 37=>"voy"];
           
-          $this->grupo_tres =["baño"=>37, "bar"=>38, "barra"=>39, "bata"=>40, "besa"=>41, "beso"=>42, "boca"=>43, "par"=>44,
-              "parra"=>45, "pelo"=>46, "pesa"=>47, "peso"=>48, "pez"=>49, "pino"=>50, "poca"=>51, "vez"=>52, "vino"=>53];
+          $this->grupo_tres =[38=>"baño", 39=>"bar", 40=>"barra", 41=>"bata", 42=>"besa", 43=>"beso", 44=>"boca", 45=>"par",
+              46=>"parra", 47=>"pelo", 48=>"pesa", 49=>"peso", 50=>"pez", 51=>"pino", 52=>"poca", 53=>"vez", 54=>"vino"];
           
-          $this->grupo_cuatro = ["boca"=>54, "boda"=>55, "codo"=>56, "condado"=>57, "contado"=>58, "domar"=>59, "saldar"=>60, "saltado"=>61,
-              "saltar"=>62, "seda"=>63, "soldado"=>64, "tienda"=>65, "tiendo"=>66, "tienta"=>67, "tiento"=>68, "tomar"=>69, "zeta"=>70];
+          $this->grupo_cuatro = [55=>"boca", 56=>"boda", 57=>"codo", 58=>"condado", 59=>"contado", 60=>"domar", 61=>"saldar", 62=>"saltado",
+              63=>"saltar", 64=>"seda", 65=>"soldado", 66=>"tienda", 67=>"tiendo", 68=>"tienta", 69=>"tiento", 70=>"tomar", 71=>"zeta"];
           
-          $this->grupo_cinco = ["cama"=>71, "cana"=>72, "casa"=>73, "caucho"=>74, "coma"=>75, "corro"=>76, "gama"=>77, "gana"=>78, 
-              "gasa"=>79, "gaucho"=>80, "goloso"=>81, "goma"=>82, "gorro"=>83, "guita"=>84, "quita"=>85, "toca"=>86, "toga"=>87, "vaca"=>88];
+          $this->grupo_cinco = [72=>"cama", 73=>"cana", 74=>"casa", 75=>"caucho", 76=>"coma", 77=>"corro", 78=>"gama", 79=>"gana", 
+              80=>"gasa", 81=>"gaucho", 82=>"goloso", 83=>"goma", 84=>"gorro", 85=>"guita", 86=>"quita", 87=>"toca", 88=>"toga", 89=>"vaca"];
           
           $this->listado = ["grupo1", "grupo2", "grupo2", "grupo4", "grupo5"];
            
@@ -185,7 +185,7 @@ class Algoritmo{
                 
                 $contador++;
                 
-                echo $this->palabra1;
+                echo " ".$this->palabra1;
 
                 //$mqtt->close();
 
@@ -196,7 +196,7 @@ class Algoritmo{
                 
                 $contador++;
                 
-                echo $this->palabra2;
+                echo " ".$this->palabra2;
 
                 //$mqtt->close();
 
@@ -208,7 +208,7 @@ class Algoritmo{
                 
                 $contador++;
                 
-                echo $this->palabra3;
+                echo " ".$this->palabra3;
 
                 //$mqtt->close();
 
@@ -220,22 +220,25 @@ class Algoritmo{
                 
                 $contador++;
                 
-                echo $this->palabra4;
-
-               
-
+                echo " ".$this->palabra4;
        
             }
             
-             $mqtt->close();
-            
-        }else{
             if($contador ==4){
-                echo 'Se ha terminado la ejecución del test';
+                echo ' ---> Se ha terminado la ejecución del test';
             }
-            if($repeticion[0] != "repeticion"){
-                echo 'No hay respuesta aun por parte del usuario.';
+            
+            else{
+            
+                if($repeticion[0] != "repeticion"){
+                    echo 'No hay respuesta aun por parte del usuario.';
+                }
             }
+            
+            $mqtt->close();
+             
+             
+            
         }
         
     }
