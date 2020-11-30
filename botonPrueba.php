@@ -20,6 +20,7 @@
                 if(isset($_POST['inicioTest'])) {  //recibir la orden del botón de iniciar el test
                     $algoritmo = new Algoritmo();
                     $algoritmo->iniciarTest();
+                    $algoritmo->pubSub();
 
                 } 
             ?>

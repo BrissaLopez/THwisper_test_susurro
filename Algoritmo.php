@@ -1,6 +1,6 @@
-
-
 <?php
+
+include("phpMQTT.php");
 
 
 
@@ -22,8 +22,7 @@ class Algoritmo{
      private $palabra2;
      private $palabra3;
      private $palabra4;
-     private $palabra5;
-     private $palabra6;
+  
      
      //private $nombrePalabra;
      
@@ -90,39 +89,40 @@ class Algoritmo{
         if(strcmp($grupoString, "grupo1")== 0){
             echo " = grupo1"."<br>";
                     
-            $palabrasSeleccionadas = array_rand($this->grupo_uno, 3);
+            $palabrasSeleccionadas = array_rand($this->grupo_uno, 2);
                 
             $this->seleccionaPalabra($palabrasSeleccionadas, $ciclo);
                     
         }else if (strcmp($grupoString, "grupo2")== 0){
             echo " = grupo2"."<br>";
-            $palabrasSeleccionadas = array_rand($this->grupo_dos, 3);
+            $palabrasSeleccionadas = array_rand($this->grupo_dos, 2);
             $this->seleccionaPalabra($palabrasSeleccionadas, $ciclo);
                     
         }else if (strcmp($grupoString, "grupo3")== 0){
             echo " = grupo3"."<br>";
                     
-            $palabrasSeleccionadas = array_rand($this->grupo_tres, 3);
+            $palabrasSeleccionadas = array_rand($this->grupo_tres, 2);
             $this->seleccionaPalabra($palabrasSeleccionadas,$ciclo);
                     
         }else if (strcmp($grupoString, "grupo4")== 0){
             echo " = grupo4"."<br>";
                     
-            $palabrasSeleccionadas = array_rand($this->grupo_cuatro, 3);
+            $palabrasSeleccionadas = array_rand($this->grupo_cuatro, 2);
             $this->seleccionaPalabra($palabrasSeleccionadas, $ciclo);
                     
         }else if (strcmp($grupoString, "grupo5")== 0){
             echo " = grupo5"."<br>";
                     
-            $palabrasSeleccionadas = array_rand($this->grupo_cinco, 3);
+            $palabrasSeleccionadas = array_rand($this->grupo_cinco, 2);
             $this->seleccionaPalabra($palabrasSeleccionadas, $ciclo);
                     
         }else {
             echo " Ha habido un error al escoger un grupo";
         }
         
-        header("Location:http://127.0.0.1:1880/test?palabra1=$this->palabra1&palabra2=$this->palabra2&palabra3=$this->palabra3&palabra4=$this->palabra4&palabra5=$this->palabra5&palabra6=$this->palabra6");
-        
+        //manda a Node-RED para enviar por mqtt
+        //header("Location:http://127.0.0.1:1880/test?palabra1=$this->palabra1&palabra2=$this->palabra2&palabra3=$this->palabra3&palabra4=$this->palabra4");
+        //$this->pubSub();
     }
     
     
@@ -140,42 +140,103 @@ class Algoritmo{
                     $this->palabra2= $nombrePalabra;
                   
                 }
-                if($indicePalabra ==2){
-                    $this->palabra3= $nombrePalabra;
-                  
-                }
+             
                 
             }
             if($ciclo==2){
                 if($indicePalabra ==0){
-                    $this->palabra4= $nombrePalabra;
+                    $this->palabra3= $nombrePalabra;
                    
                 }
                 if($indicePalabra ==1){
-                    $this->palabra5= $nombrePalabra;
+                    $this->palabra4= $nombrePalabra;
                    
                 }
-                if($indicePalabra ==2){
-                    $this->palabra6= $nombrePalabra;
-                    
-                }
-                
+               
             }
-            
-            
             
             //echo " ".$indicePalabra." = ".$nombrePalabra."<br>";
             
-            
-            
-             
         }
         
-        //$palabras= array_values($arrayPalabrasAleatorias);
-        //print_r(array_values($arrayPalabrasAleatorias));
-        //header("Location:http://localhost:90/TWHISPER/EnviaANodeRed.php?palabra1=$palabra1&palabra2=$palabra2&palabra3=$palabra3");
-        //header("Location:http://127.0.0.1:1880/test?palabra1=$palabra1&palabra2=$palabra2&palabra3=$palabra3");
-        //var_export($arrayPalabrasAleatorias);
+    }
+   
+    
+    public function pubSub(){
+        $mqtt = new phpMQTT("lossolos.hopto.org", 1883, "ClientID".rand());
+        
+        $repeticion["repeticion"]= array('qos' => 2);
+        
+        $contador = 0;
+        
+        
+        
+        if ($mqtt->connect(true,NULL,"","")) {
+            
+            
+            //suscribir
+            $mqtt->subscribe($repeticion, 2);
+            //$mqtt->close();
+            
+            
+            //publicar
+            if($this->palabra1 != ""){
+                $mqtt->publish("Pista",$this->palabra1, 0);
+                
+                $contador++;
+                
+                echo $this->palabra1;
+
+                //$mqtt->close();
+
+              
+            }
+            if($this->palabra2 != ""){
+                $mqtt->publish("Pista",$this->palabra2, 0);
+                
+                $contador++;
+                
+                echo $this->palabra2;
+
+                //$mqtt->close();
+
+             
+            }
+            
+            if($this->palabra3 != "" ){
+                $mqtt->publish("Pista",$this->palabra3, 0);
+                
+                $contador++;
+                
+                echo $this->palabra3;
+
+                //$mqtt->close();
+
+         
+            }
+            
+            if($this->palabra4 != ""){
+                $mqtt->publish("Pista",$this->palabra4, 0);
+                
+                $contador++;
+                
+                echo $this->palabra4;
+
+               
+
+       
+            }
+            
+             $mqtt->close();
+            
+        }else{
+            if($contador ==4){
+                echo 'Se ha terminado la ejecución del test';
+            }
+            if($repeticion[0] != "repeticion"){
+                echo 'No hay respuesta aun por parte del usuario.';
+            }
+        }
         
     }
         
